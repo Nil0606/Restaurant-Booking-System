@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Manage Tables</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
+      table {
+        border-collapse: collapse;
+        width: 80%;
+        margin-bottom: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      form {
+        margin-top: 20px;
+      }
+      input,
+      select,
+      button {
+        padding: 6px;
+        margin: 5px;
+      }
+      button {
+        cursor: pointer;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .back-link {
+        margin-bottom: 15px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="{{ url_for('home') }}" class="back-link">← Back to Home</a>
+      <h1>Manage Tables</h1>
+
+      <h2>Existing Tables</h2>
+      {% if tables %}
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Position</th>
+            <th>Capacity</th>
+            <th>Active Flag</th>
+            <th>Maintenance Flag</th>
+            <th>Special Event Flag</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for t in tables %}
+          <tr>
+            <td>{{ t.id }}</td>
+            <td>{{ t.position }}</td>
+            <td>{{ t.capacity }}</td>
+            <td>{{ t.active_flag }}</td>
+            <td>{{ t.maintenance_flag }}</td>
+            <td>{{ t.special_event_flag }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>No tables found.</p>
+      {% endif %}
+
+      <h2>Add New Table</h2>
+      <form action="{{ url_for('add_table') }}" method="POST">
+        <label for="position">Position:</label>
+        <select name="position" id="position" required>
+          <option value="center">Center</option>
+          <option value="window">Window</option>
+          <option value="outdoor">Outdoor</option>
+          <option value="indoor">Indoor</option>
+          <option value="bar">Bar</option>
+          <option value="rooftop">Rooftop</option>
+        </select>
+
+        <label for="capacity">Capacity:</label>
+        <select name="capacity" id="capacity" required>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+        </select>
+
+        <label for="maintenance_flag">Maintenance:</label>
+        <select name="maintenance_flag" id="maintenance_flag">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+
+        <label for="special_event_flag">Special Event:</label>
+        <select name="special_event_flag" id="special_event_flag">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+
+        <button type="submit">Add Table</button>
+      </form>
+    </div>
+  </body>
+</html>

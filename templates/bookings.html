@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Bookings</h2>
+<table>
+  <thead>
+    <tr><th>ID</th><th>Customer</th><th>Email</th><th>Table</th><th>Start</th><th>End</th><th>Status</th></tr>
+  </thead>
+  <tbody>
+  {% for b in bookings %}
+    <tr>
+      <td>{{ b.id }}</td>
+      <td>{{ b.customer_name }}</td>
+      <td>{{ b.customer_email }}</td>
+      <td>{{ b.position }} ({{ b.capacity }})</td>
+      <td>{{ b.start_time }}</td>
+      <td>{{ b.end_time }}</td>
+      <td>{% if b.active_flag == 1 %}Active{% else %}Cancelled{% endif %}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

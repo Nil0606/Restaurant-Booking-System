@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>New Booking</h2>
+<form action="/bookings/new" method="post">
+    <label>Customer Name: <input type="text" name="customer_name" required></label>
+    <label>Email: <input type="email" name="customer_email" required></label>
+    <label>Table:
+        <select name="table_id">
+            {% for t in tables %}
+                <option value="{{ t.id }}">{{ t.position }} (Capacity: {{ t.capacity }})</option>
+            {% endfor %}
+        </select>
+    </label>
+    <label>Start Time: <input type="datetime-local" name="start_time" required></label>
+    <label>End Time: <input type="datetime-local" name="end_time" required></label>
+    <button type="submit">Book Table</button>
+</form>
+{% endblock %}
