@@ -10,4 +10,5 @@ DATABASE = {
     "user": os.getenv("DB_USER", "root"),
     "password": os.getenv("DB_PASSWORD", "pass"),
     "database": os.getenv("DB_NAME", "production"),
+    "port": 3306
 }
